@@ -266,7 +266,13 @@ function createServiceElement(service, index, isCustom) {
           <button class="tier-btn ${service.selectedTier === tierIndex ? 'active' : ''}" 
                   onclick="selectServiceTier(${index}, ${tierIndex}, ${isCustom})">
             <span class="tier-name editable" onclick="makeEditableTier(this, ${tierIndex})" data-original="${tier}">${tier}</span><br>
-            <small>${formatCurrency(rates[tierIndex])}/hr</small>
+           <small>
+  <input type="number" min="0" step="0.01"
+    value="${service.rates[tierIndex]}"
+    onchange="updateTierRate('service', ${index}, ${tierIndex}, this.value, ${isCustom})"
+    style="width: 70px;">
+  /hr
+</small>
           </button>
         `).join('')}
       </div>
@@ -323,7 +329,12 @@ function createProductElement(product, index, isCustom) {
           <button class="tier-btn ${product.selectedTier === tierIndex ? 'active' : ''}" 
                   onclick="selectProductTier(${index}, ${tierIndex}, ${isCustom})">
             <span class="tier-name editable" onclick="makeEditableTier(this, ${tierIndex})" data-original="${tier}">${tier}</span><br>
-            <small>${formatCurrency(prices[tierIndex])}</small>
+            <small>
+  <input type="number" min="0" step="0.01"
+    value="${product.prices[tierIndex]}"
+    onchange="updateTierRate('product', ${index}, ${tierIndex}, this.value, ${isCustom})"
+    style="width: 70px;">
+</small>
           </button>
         `).join('')}
       </div>
@@ -531,6 +542,22 @@ function setProductQuantity(index, value, isCustom) {
     currentState.products[index];
   
   product.quantity = Math.max(0, parseInt(value) || 0);
+  calculateTotal();
+  saveToStorage();
+}
+
+function updateTierRate(type, index, tierIndex, value, isCustom) {
+  const newValue = parseFloat(value) || 0;
+  if (newValue < 0) return;
+  if (type === 'service') {
+    const arr = isCustom ? currentState.customServices : currentState.services;
+    arr[isCustom ? index - currentState.services.length : index].rates[tierIndex] = newValue;
+    renderServices();
+  } else if (type === 'product') {
+    const arr = isCustom ? currentState.customProducts : currentState.products;
+    arr[isCustom ? index - currentState.products.length : index].prices[tierIndex] = newValue;
+    renderProducts();
+  }
   calculateTotal();
   saveToStorage();
 }
