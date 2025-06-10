@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelance Design Pricing Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-upload" id="logoUpload">
+                        <input type="file" id="logoInput" accept=".png,.jpg,.jpeg,.svg" style="display: none;">
+                        <div class="logo-placeholder" id="logoPlaceholder">
+                            <span>Click to upload logo</span>
+                            <small>PNG, JPG, JPEG, SVG (max 2MB)</small>
+                        </div>
+                        <img id="logoPreview" class="logo-preview" style="display: none;">
+                    </div>
+                </div>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <strong>Phone:</strong> +359 878 130 399
+                    </div>
+                    <div class="contact-item">
+                        <strong>Email:</strong> contact@zuberovdesign.com
+                    </div>
+                    <div class="contact-item">
+                        <strong>Web:</strong> www.zuberovdesign.com
+                    </div>
+                </div>
+                
+                <div class="header-controls">
+                    <div class="control-group">
+                        <label for="currencySelect">Currency:</label>
+                        <select id="currencySelect" class="form-control">
+                            <option value="BGN">BGN</option>
+                            <option value="EUR">EUR</option>
+                            <option value="USD">USD</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="regionSelect">Region:</label>
+                        <select id="regionSelect" class="form-control">
+                            <option value="bulgaria">Bulgaria Local (0.7x)</option>
+                            <option value="eu">EU/International (1.0x)</option>
+                            <option value="premium">Premium International (1.4x)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Services Section -->
+        <section class="services-section">
+            <h2>Services</h2>
+            <div class="services-container" id="servicesContainer">
+                <!-- Services will be dynamically generated -->
+            </div>
+            <button class="btn btn--primary add-custom-btn" id="addCustomService">Add Custom Service</button>
+        </section>
+
+        <!-- Products Section -->
+        <section class="products-section">
+            <h2>Products</h2>
+            <div class="products-container" id="productsContainer">
+                <!-- Products will be dynamically generated -->
+            </div>
+            <button class="btn btn--primary add-custom-btn" id="addCustomProduct">Add Custom Product</button>
+        </section>
+
+        <!-- Project Parameters -->
+        <section class="parameters-section">
+            <h2>Project Parameters</h2>
+            <div class="parameters-grid">
+                <div class="parameter-group">
+                    <label for="complexitySelect">Complexity:</label>
+                    <select id="complexitySelect" class="form-control">
+                        <option value="standard">Standard (1.0x)</option>
+                        <option value="medium">Medium Complexity (1.3x)</option>
+                        <option value="high">High Complexity (1.7x)</option>
+                        <option value="very-complex">Very Complex (2.2x)</option>
+                    </select>
+                </div>
+                
+                <div class="parameter-group">
+                    <label for="urgencySelect">Urgency:</label>
+                    <select id="urgencySelect" class="form-control">
+                        <option value="standard">Standard Timeline (1.0x)</option>
+                        <option value="rush">Rush 1-3 days (1.5x)</option>
+                        <option value="urgent">Urgent 24-48 hours (2.0x)</option>
+                        <option value="emergency">Emergency same day (3.0x)</option>
+                    </select>
+                </div>
+                
+                <div class="parameter-group">
+                    <label for="discountInput">Discount (%):</label>
+                    <input type="number" id="discountInput" class="form-control" min="0" max="100" value="0">
+                </div>
+                
+                <div class="parameter-group">
+                    <label for="additionalCosts">Additional Costs:</label>
+                    <input type="number" id="additionalCosts" class="form-control" min="0" value="0" step="0.01">
+                </div>
+            </div>
+        </section>
+
+        <!-- Quote Customization -->
+        <section class="quote-section">
+            <h2>Quote Customization</h2>
+            <div class="quote-customization">
+                <div class="client-details">
+                    <h3>Client Details</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="clientName">Client Name:</label>
+                            <input type="text" id="clientName" class="form-control" value="Client Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="clientCompany">Company:</label>
+                            <input type="text" id="clientCompany" class="form-control" value="Company Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="clientEmail">Email:</label>
+                            <input type="email" id="clientEmail" class="form-control" value="client@company.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="clientPhone">Phone:</label>
+                            <input type="text" id="clientPhone" class="form-control" value="+1 (555) 123-4567">
+                        </div>
+                        <div class="form-group span-full">
+                            <label for="clientAddress">Address:</label>
+                            <textarea id="clientAddress" class="form-control" rows="2">123 Business Street, City, State 12345</textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quote-text">
+                    <div class="form-group">
+                        <label for="quoteGreeting">Greeting/Introduction:</label>
+                        <textarea id="quoteGreeting" class="form-control" rows="3">Dear [Client Name],
+
+Thank you for considering our design services. Please find below our detailed quote for your project requirements.</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectDuration">Project Duration:</label>
+                        <input type="text" id="projectDuration" class="form-control" value="2-3 weeks">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="termsConditions">Terms and Conditions:</label>
+                        <textarea id="termsConditions" class="form-control" rows="4">- 50% deposit required to start the project
+- Final payment due upon project completion
+- 2 rounds of revisions included
+- Additional revisions charged at hourly rate
+- All source files included upon final payment</textarea>
+                    </div>
+                    
+                    <div class="vat-toggle">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="vatToggle">
+                            <span class="checkmark"></span>
+                            Include VAT
+                        </label>
+                        <div class="vat-disclaimer">
+                            <label for="vatDisclaimer">VAT Disclaimer:</label>
+                            <textarea id="vatDisclaimer" class="form-control" rows="2">VAT will be added to the final invoice as per local tax requirements.</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary and Quote Generation -->
+        <section class="summary-section">
+            <div class="summary-controls">
+                <div class="rate-display-toggle">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="showBaseRates">
+                        <span class="checkmark"></span>
+                        Show base rates
+                    </label>
+                </div>
+                <button class="btn btn--primary" id="generateQuote">Generate Quote</button>
+                <button class="btn btn--secondary" id="resetAll">Reset All</button>
+            </div>
+            
+            <div class="total-summary" id="totalSummary">
+                <div class="total-row">
+                    <span>Subtotal:</span>
+                    <span id="subtotalAmount">BGN 0.00</span>
+                </div>
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span id="totalAmount">BGN 0.00</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Quote Modal -->
+    <div id="quoteModal" class="modal">
+        <div class="modal-content quote-modal-content">
+            <div class="modal-header">
+                <h2>Generated Quote</h2>
+                <span class="close" id="closeQuoteModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="quoteContent" class="quote-content">
+                    <!-- Quote will be generated here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn--primary" id="printQuote">Print Quote</button>
+                <button class="btn btn--secondary" id="closeQuote">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Service Modal -->
+    <div id="customServiceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Custom Service</h2>
+                <span class="close" id="closeServiceModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="customServiceName">Service Name:</label>
+                    <input type="text" id="customServiceName" class="form-control" placeholder="Enter service name">
+                </div>
+                <div class="form-group">
+                    <label for="customServiceDesc">Description:</label>
+                    <textarea id="customServiceDesc" class="form-control" rows="2" placeholder="Enter service description"></textarea>
+                </div>
+                <div class="pricing-grid">
+                    <div class="form-group">
+                        <label for="customServiceSimple">Simple Rate (BGN/hr):</label>
+                        <input type="number" id="customServiceSimple" class="form-control" min="0" step="0.01" placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label for="customServiceStandard">Standard Rate (BGN/hr):</label>
+                        <input type="number" id="customServiceStandard" class="form-control" min="0" step="0.01" placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label for="customServicePremium">Premium Rate (BGN/hr):</label>
+                        <input type="number" id="customServicePremium" class="form-control" min="0" step="0.01" placeholder="0.00">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn--primary" id="addServiceBtn">Add Service</button>
+                <button class="btn btn--secondary" id="cancelService">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Product Modal -->
+    <div id="customProductModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Custom Product</h2>
+                <span class="close" id="closeProductModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="customProductName">Product Name:</label>
+                    <input type="text" id="customProductName" class="form-control" placeholder="Enter product name">
+                </div>
+                <div class="form-group">
+                    <label for="customProductDesc">Description:</label>
+                    <textarea id="customProductDesc" class="form-control" rows="2" placeholder="Enter product description"></textarea>
+                </div>
+                <div class="pricing-grid">
+                    <div class="form-group">
+                        <label for="customProductSimple">Simple Price (BGN):</label>
+                        <input type="number" id="customProductSimple" class="form-control" min="0" step="0.01" placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label for="customProductStandard">Standard Price (BGN):</label>
+                        <input type="number" id="customProductStandard" class="form-control" min="0" step="0.01" placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label for="customProductPremium">Premium Price (BGN):</label>
+                        <input type="number" id="customProductPremium" class="form-control" min="0" step="0.01" placeholder="0.00">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn--primary" id="addProductBtn">Add Product</button>
+                <button class="btn btn--secondary" id="cancelProduct">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
